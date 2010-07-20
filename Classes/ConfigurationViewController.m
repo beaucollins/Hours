@@ -16,7 +16,7 @@
 
 @implementation ConfigurationViewController
 
-@synthesize selectedOffice, timePicker;
+@synthesize scheduleManager, timePicker, delegate;
 
 #pragma mark -
 #pragma mark Initialization
@@ -36,36 +36,44 @@
 
 - (void)viewDidLoad {
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	self.title = @"Schedule";
 	
-	//load the schedule options
-	NSURL *officesURL = [[NSBundle mainBundle] URLForResource:@"Offices" withExtension:@"plist"];
-	offices = [[NSArray arrayWithContentsOfURL:officesURL] retain];
+	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneScheduling:)];
+	self.navigationItem.rightBarButtonItem = doneButton;
+	[doneButton release];
 	
-	self.selectedOffice = (NSDictionary *)[offices objectAtIndex:0];
 	notificationSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
-	notificationSwitch.on = [defaults boolForKey:@"notification_preference"];
+	notificationSwitch.on = [scheduleManager usesNotifications];
+	
 	[notificationSwitch addTarget:self action:@selector(toggleNotifications:forEvent:) forControlEvents:UIControlEventValueChanged];
 
     [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+											  
+
 /*
-- (void)viewWillAppear:(BOOL)animated {
+ - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
 }
-*/
+ */
+
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 */
-/*
+
+
 - (void)viewWillDisappear:(BOOL)animated {
+	[self hideTimePickerAnimated:animated];
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     [super viewWillDisappear:animated];
 }
-*/
+
 /*
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -79,30 +87,29 @@
 }
 */
 
-- (NSDate *)dateForSchedule:(NSDictionary *)schedule {
-	NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-	NSDateComponents *comps = [currentCalendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:[NSDate date]];
-	comps.hour = [[schedule objectForKey:@"Hour"] intValue];
-	comps.minute = [[schedule objectForKey:@"Minute"] intValue];
-	return [currentCalendar dateFromComponents:comps];
+
+- (IBAction) doneScheduling:(id)sender {
+	// send this to a delegate
+	[self.delegate configurationViewControllerDidFinish:self];
+	[scheduleManager save];
 }
 
-
-- (NSArray *)scheduleForSelectedOffice {
-	return (NSArray *)[self.selectedOffice objectForKey:@"Schedule"];
-}
 
 - (void) toggleNotifications:(id)sender forEvent:(UIEvent *)event {
-	NSLog(@"Toggle notifications %@", event);
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setBool:notificationSwitch.on forKey:@"notification_preference"];
-	
-	if ( notificationSwitch.on ) {
-		//re-schedule
-	}else {
-		[[UIApplication sharedApplication] cancelAllLocalNotifications];
-	}
+	[scheduleManager setUsesNotifications:notificationSwitch.on];
+}
 
+- (IBAction) updateSelectedTime:(id)sender {
+	Schedule *schedule = [scheduleManager selectedSchedule];
+	
+	NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+	NSDateComponents *comps = [currentCalendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:self.timePicker.datePicker.date];
+	
+	PrayerTime *prayerTime = [schedule.prayerTimes objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+	prayerTime.hour = [NSNumber numberWithInt:comps.hour];
+	prayerTime.minute = [NSNumber numberWithInt:comps.minute];
+		
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:TIME_SECTION] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark -
@@ -110,7 +117,6 @@
 
 - (void)showTimePickerAnimated:(BOOL)animated {
 	if ([self.timePicker superview] == nil) {
-		NSLog(@"Stuff: %@", self.view.superview);
 		[self.view.superview addSubview: self.timePicker];
 
 		CGRect containingFrame = self.view.superview.frame;
@@ -161,7 +167,7 @@
 }
 
 - (IBAction) dismissTimePicker:(id)sender {
-	NSLog(@"%@", [self.tableView indexPathForSelectedRow]);
+
 	[self hideTimePickerAnimated:YES];
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
@@ -178,9 +184,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
 	if (section == SELECT_SCHEDULE_SECTION) {
-		return [offices count];
+		return [scheduleManager.schedules count];
 	}else if (section == TIME_SECTION) {
-		return [[self scheduleForSelectedOffice] count];
+		return [scheduleManager.selectedSchedule.prayerTimes count];
 	}else {
 		return 1;
 	}
@@ -202,9 +208,10 @@
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ScheduleCellIdentifier] autorelease];
 		}
+		Schedule *schedule = (Schedule *)[scheduleManager.schedules objectAtIndex:indexPath.row];
 		
-		cell.textLabel.text = [[offices objectAtIndex:indexPath.row] objectForKey:@"Label"];
-		if ( indexPath.row == [offices indexOfObject:self.selectedOffice] ) {
+		cell.textLabel.text = schedule.name;
+		if ( schedule == scheduleManager.selectedSchedule ) {
 			cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
 		}else {
@@ -221,12 +228,13 @@
 		}
 		
 		
-		NSDictionary *timeDetails = [[self scheduleForSelectedOffice] objectAtIndex:indexPath.row];
-		
+		PrayerTime *prayerTime = (PrayerTime *)[scheduleManager.selectedSchedule.prayerTimes objectAtIndex:indexPath.row];
+
 		cell.accessoryType = UITableViewCellAccessoryNone;
-		cell.textLabel.text = [NSString stringWithFormat:@"Prayer %d", indexPath.row + 1];
-		[cell setTimeWithHour:[timeDetails objectForKey:@"Hour"] andMinute:[timeDetails objectForKey:@"Minute"]];
+		cell.textLabel.text = prayerTime.name;
+		[cell setTimeWithHour:prayerTime.hour andMinute:prayerTime.minute];
 		return cell;
+		
 	} else {
 		// notification section
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NotificationCellIdentifier];
@@ -243,7 +251,7 @@
     
 }
 
-
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if ( section ==  SELECT_SCHEDULE_SECTION ) {
 		return @"Schedule";
@@ -252,6 +260,7 @@
 	}
 	return nil;
 }
+*/
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -272,30 +281,28 @@
 	if ( indexPath.section == SELECT_SCHEDULE_SECTION ) {
 		
 		[self hideTimePickerAnimated:YES];
-		[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
-
-		if (indexPath.row == [offices indexOfObject:self.selectedOffice]) {
+		[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+		Schedule *schedule = (Schedule *)[scheduleManager.schedules objectAtIndex:indexPath.row];
+		if ( schedule == [scheduleManager selectedSchedule]) {
 			return;
 		}
 		
-		
-		NSDictionary *oldOffice = self.selectedOffice;
-		self.selectedOffice = (NSDictionary *)[offices objectAtIndex:indexPath.row];
-		
 		UITableViewCell *oldCell = [self.tableView cellForRowAtIndexPath:
-									[NSIndexPath indexPathForRow:[offices indexOfObject:oldOffice] inSection:indexPath.section]];
+									[NSIndexPath indexPathForRow:[scheduleManager selectedScheduleIndex] inSection:indexPath.section]];
+
+		[scheduleManager setSelectedSchedule:schedule];
+		
 		UITableViewCell *newCell = [self.tableView cellForRowAtIndexPath:indexPath];
 		oldCell.accessoryType = UITableViewCellAccessoryNone;
 		newCell.accessoryType = UITableViewCellAccessoryCheckmark;
 		
 		[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:TIME_SECTION] withRowAnimation:UITableViewRowAnimationFade];
 		
-		
 	} else if ( indexPath.section == TIME_SECTION ) {
 		// display the time picker?
-		NSDate *selectedDate = [self dateForSchedule:[[self scheduleForSelectedOffice] objectAtIndex:indexPath.row]];
+		PrayerTime *prayerTime = [scheduleManager.selectedSchedule.prayerTimes objectAtIndex:indexPath.row];
 		[self showTimePickerAnimated:YES];
-		[self.timePicker.datePicker setDate:selectedDate animated:YES];
+		[self.timePicker.datePicker setDate:prayerTime.date animated:YES];
 		
 	}
 
@@ -314,17 +321,15 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
 	[notificationSwitch removeTarget:self action:NULL forControlEvents:UIControlEventValueChanged];
 	notificationSwitch = nil;
 }
 
 
 - (void)dealloc {
-	[selectedOffice release];
-	[offices release];
+	[scheduleManager release];
 	[notificationSwitch release];
+	[timePicker release];
     [super dealloc];
 }
 

@@ -13,12 +13,19 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		8F0F383111ED16B0005C908F /* PrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F383011ED16B0005C908F /* PrayerViewController.m */; };
+		8F0F386511ED207C005C908F /* TapDetectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F386411ED207C005C908F /* TapDetectWindow.m */; };
+		8F0F397311ED3AE0005C908F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0F397211ED3AE0005C908F /* QuartzCore.framework */; };
 		8F13485311E7845700C776D2 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F13485211E7845700C776D2 /* ConfigurationViewController.m */; };
 		8F1348B111E78F4B00C776D2 /* Offices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F1348B011E78F4B00C776D2 /* Offices.plist */; };
 		8F1348F311E79E6800C776D2 /* ConfigureTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1348F211E79E6800C776D2 /* ConfigureTimeCell.m */; };
 		8F13494811E7AEBC00C776D2 /* ConfigurationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F13494711E7AEBC00C776D2 /* ConfigurationViewController.xib */; };
 		8F13495611E7B0B900C776D2 /* TimePickerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F13495511E7B0B900C776D2 /* TimePickerSheet.m */; };
 		8F134A3811E7D94A00C776D2 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F134A3711E7D94A00C776D2 /* Schedule.m */; };
+		8F24277011F62260004765B6 /* Prayers in Resources */ = {isa = PBXBuildFile; fileRef = 8F24275F11F62260004765B6 /* Prayers */; };
+		8FABC16811EF77B20068D188 /* ScheduleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABC16711EF77B20068D188 /* ScheduleManager.m */; };
+		8FBB43B911F4B897002D837C /* PrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB43B811F4B897002D837C /* PrayerListViewController.m */; };
+		8FE88C8711EF824F007CA340 /* PrayerTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE88C8611EF824F007CA340 /* PrayerTime.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +39,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Hours_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hours_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Hours-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hours-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8F0F382F11ED16B0005C908F /* PrayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrayerViewController.h; sourceTree = "<group>"; };
+		8F0F383011ED16B0005C908F /* PrayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrayerViewController.m; sourceTree = "<group>"; };
+		8F0F386311ED207C005C908F /* TapDetectWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectWindow.h; sourceTree = "<group>"; };
+		8F0F386411ED207C005C908F /* TapDetectWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectWindow.m; sourceTree = "<group>"; };
+		8F0F397211ED3AE0005C908F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8F13485111E7845700C776D2 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
 		8F13485211E7845700C776D2 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
 		8F1348B011E78F4B00C776D2 /* Offices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Offices.plist; sourceTree = "<group>"; };
@@ -42,6 +54,13 @@
 		8F13495511E7B0B900C776D2 /* TimePickerSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePickerSheet.m; sourceTree = "<group>"; };
 		8F134A3611E7D94A00C776D2 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		8F134A3711E7D94A00C776D2 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
+		8F24275F11F62260004765B6 /* Prayers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Prayers; sourceTree = "<group>"; };
+		8FABC16611EF77B20068D188 /* ScheduleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleManager.h; sourceTree = "<group>"; };
+		8FABC16711EF77B20068D188 /* ScheduleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleManager.m; sourceTree = "<group>"; };
+		8FBB43B711F4B897002D837C /* PrayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrayerListViewController.h; sourceTree = "<group>"; };
+		8FBB43B811F4B897002D837C /* PrayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrayerListViewController.m; sourceTree = "<group>"; };
+		8FE88C8511EF824F007CA340 /* PrayerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrayerTime.h; sourceTree = "<group>"; };
+		8FE88C8611EF824F007CA340 /* PrayerTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrayerTime.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +71,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				8F0F397311ED3AE0005C908F /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,16 +81,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8F13495411E7B0B900C776D2 /* TimePickerSheet.h */,
-				8F13495511E7B0B900C776D2 /* TimePickerSheet.m */,
-				8F13485111E7845700C776D2 /* ConfigurationViewController.h */,
-				8F13485211E7845700C776D2 /* ConfigurationViewController.m */,
+				8FABC16C11EF77E40068D188 /* Custom */,
+				8FABC16B11EF77D00068D188 /* Controllers */,
+				8FABC16A11EF77C50068D188 /* Views */,
+				8FABC16911EF77BA0068D188 /* Models */,
 				1D3623240D0F684500981E51 /* HoursAppDelegate.h */,
 				1D3623250D0F684500981E51 /* HoursAppDelegate.m */,
-				8F1348F111E79E6800C776D2 /* ConfigureTimeCell.h */,
-				8F1348F211E79E6800C776D2 /* ConfigureTimeCell.m */,
-				8F134A3611E7D94A00C776D2 /* Schedule.h */,
-				8F134A3711E7D94A00C776D2 /* Schedule.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -91,6 +107,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				8F0F397211ED3AE0005C908F /* QuartzCore.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -107,6 +124,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8F24275F11F62260004765B6 /* Prayers */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Hours-Info.plist */,
 				8F1348B011E78F4B00C776D2 /* Offices.plist */,
@@ -123,6 +141,52 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8FABC16911EF77BA0068D188 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8F134A3611E7D94A00C776D2 /* Schedule.h */,
+				8F134A3711E7D94A00C776D2 /* Schedule.m */,
+				8FABC16611EF77B20068D188 /* ScheduleManager.h */,
+				8FABC16711EF77B20068D188 /* ScheduleManager.m */,
+				8FE88C8511EF824F007CA340 /* PrayerTime.h */,
+				8FE88C8611EF824F007CA340 /* PrayerTime.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8FABC16A11EF77C50068D188 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F13495411E7B0B900C776D2 /* TimePickerSheet.h */,
+				8F13495511E7B0B900C776D2 /* TimePickerSheet.m */,
+				8F1348F111E79E6800C776D2 /* ConfigureTimeCell.h */,
+				8F1348F211E79E6800C776D2 /* ConfigureTimeCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8FABC16B11EF77D00068D188 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F13485111E7845700C776D2 /* ConfigurationViewController.h */,
+				8F13485211E7845700C776D2 /* ConfigurationViewController.m */,
+				8F0F382F11ED16B0005C908F /* PrayerViewController.h */,
+				8F0F383011ED16B0005C908F /* PrayerViewController.m */,
+				8FBB43B711F4B897002D837C /* PrayerListViewController.h */,
+				8FBB43B811F4B897002D837C /* PrayerListViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8FABC16C11EF77E40068D188 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				8F0F386311ED207C005C908F /* TapDetectWindow.h */,
+				8F0F386411ED207C005C908F /* TapDetectWindow.m */,
+			);
+			name = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +234,7 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				8F1348B111E78F4B00C776D2 /* Offices.plist in Resources */,
 				8F13494811E7AEBC00C776D2 /* ConfigurationViewController.xib in Resources */,
+				8F24277011F62260004765B6 /* Prayers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +251,11 @@
 				8F1348F311E79E6800C776D2 /* ConfigureTimeCell.m in Sources */,
 				8F13495611E7B0B900C776D2 /* TimePickerSheet.m in Sources */,
 				8F134A3811E7D94A00C776D2 /* Schedule.m in Sources */,
+				8F0F383111ED16B0005C908F /* PrayerViewController.m in Sources */,
+				8F0F386511ED207C005C908F /* TapDetectWindow.m in Sources */,
+				8FABC16811EF77B20068D188 /* ScheduleManager.m in Sources */,
+				8FE88C8711EF824F007CA340 /* PrayerTime.m in Sources */,
+				8FBB43B911F4B897002D837C /* PrayerListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

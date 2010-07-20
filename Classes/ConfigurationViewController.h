@@ -8,20 +8,32 @@
 
 #import <UIKit/UIKit.h>
 #import "TimePickerSheet.h"
+#import "ScheduleManager.h"
+
+@protocol ConfigurationViewControllerDelegate;
 
 @interface ConfigurationViewController : UITableViewController {
-	NSArray *offices;
-	NSDictionary *selectedOffice;
+	ScheduleManager *scheduleManager;
+	id <ConfigurationViewControllerDelegate> delegate;
 	TimePickerSheet *timePicker;
 	UISwitch *notificationSwitch;
 }
 
-@property (nonatomic, retain) NSDictionary *selectedOffice;
+@property (nonatomic, retain) ScheduleManager *scheduleManager;
 @property (nonatomic, retain) IBOutlet TimePickerSheet *timePicker;
+@property (nonatomic, assign) id <ConfigurationViewControllerDelegate> delegate;
 
-- (NSArray *)scheduleForSelectedOffice;
 - (void)showTimePickerAnimated:(BOOL)animated;
 - (void)hideTimePickerAnimated:(BOOL)animated;
 - (IBAction) dismissTimePicker:(id)sender;
+- (IBAction) updateSelectedTime:(id)sender;
+- (IBAction) doneScheduling:(id)sender;
 - (void) toggleNotifications:(id)sender forEvent:(UIEvent *)event;
+
+@end
+
+@protocol ConfigurationViewControllerDelegate
+
+- (void)configurationViewControllerDidFinish:(ConfigurationViewController *)configurationController;
+
 @end

@@ -5,23 +5,37 @@
 	<dict>
 		<key>Label</key>
 		<string>3 Per Day</string>
+		<key>identifier</key>
+		<string>3-per-day</string>
 		<key>Schedule</key>
 		<array>
 			<dict>
+				<key>page</key>
+				<string>morning-prayer.html</string>
+				<key>Name</key>
+				<string>Morning Prayer</string>
 				<key>Hour</key>
-				<integer>9</integer>
+				<integer>8</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>page</key>
+				<string>noon-prayers.html</string>
+				<key>Name</key>
+				<string>Noon Prayers</string>
 				<key>Hour</key>
 				<integer>12</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>page</key>
+				<string>night-prayers.html</string>
+				<key>Name</key>
+				<string>Night Prayers</string>
 				<key>Hour</key>
-				<integer>15</integer>
+				<integer>20</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
@@ -30,47 +44,77 @@
 	<dict>
 		<key>Label</key>
 		<string>7 Per Day</string>
+		<key>identifier</key>
+		<string>7-per-day</string>
 		<key>Schedule</key>
 		<array>
 			<dict>
+				<key>page</key>
+				<string>prime.html</string>
+				<key>Name</key>
+				<string>Prime</string>
 				<key>Hour</key>
 				<integer>7</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
-				<key>Hour</key>
-				<integer>8</integer>
-				<key>Minute</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>Hour</key>
-				<integer>9</integer>
-				<key>Minute</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
+				<key>page</key>
+				<string>terce.html</string>
+				<key>Name</key>
+				<string>Terce</string>
 				<key>Hour</key>
 				<integer>10</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
-				<key>Hour</key>
-				<integer>11</integer>
-				<key>Minute</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
+				<key>page</key>
+				<string>sext.html</string>
+				<key>Name</key>
+				<string>Sext</string>
 				<key>Hour</key>
 				<integer>12</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>page</key>
+				<string>none.html</string>
+				<key>Name</key>
+				<string>None</string>
 				<key>Hour</key>
-				<integer>13</integer>
+				<integer>14</integer>
+				<key>Minute</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>page</key>
+				<string>meal.html</string>
+				<key>Name</key>
+				<string>Prayer at Meal Time</string>
+				<key>Hour</key>
+				<integer>18</integer>
+				<key>Minute</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>page</key>
+				<string>vespers.html</string>
+				<key>Name</key>
+				<string>Vespers</string>
+				<key>Hour</key>
+				<integer>20</integer>
+				<key>Minute</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>page</key>
+				<string>compline.html</string>
+				<key>Name</key>
+				<string>Compline</string>
+				<key>Hour</key>
+				<integer>21</integer>
 				<key>Minute</key>
 				<integer>0</integer>
 			</dict>
